@@ -77,7 +77,7 @@ export function NeuralNetworkBackground() {
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
-            ctx.strokeStyle = `rgba(34, 211, 238, ${alpha * 0.25})`
+            ctx.strokeStyle = `rgba(52, 211, 153, ${alpha * 0.25})`
             ctx.lineWidth = 1
             ctx.stroke()
           }

@@ -6,6 +6,7 @@ import { SITE } from '../config/site'
 
 const navLinks = [
   { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -25,12 +26,12 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3 shadow-lg shadow-cyan-500/5' : 'bg-transparent py-5'
+        scrolled ? 'glass py-3 shadow-lg shadow-emerald-500/5' : 'bg-transparent py-5'
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2 font-semibold text-white">
-          <Brain className="h-5 w-5 text-cyan-400" />
+          <Brain className="h-5 w-5 text-emerald-400" />
           <span className="font-mono text-sm tracking-tight">PA</span>
         </a>
 
@@ -39,7 +40,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                className="text-sm text-slate-400 transition-colors hover:text-emerald-400"
               >
                 {link.label}
               </a>
@@ -102,7 +103,7 @@ function SocialIcon({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="rounded-lg p-2 text-slate-400 transition-all hover:bg-white/5 hover:text-cyan-400"
+      className="rounded-lg p-2 text-slate-400 transition-all hover:bg-white/5 hover:text-emerald-400"
     >
       <Icon className="h-5 w-5" />
     </a>

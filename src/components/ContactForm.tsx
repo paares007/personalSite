@@ -88,7 +88,7 @@ export function ContactForm() {
           transition={{ duration: 0.6 }}
           className="mb-10 text-center"
         >
-          <p className="mb-2 font-mono text-sm text-cyan-400">// contact</p>
+          <p className="mb-2 font-mono text-sm text-emerald-400">// contact</p>
           <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
             Let&apos;s <span className="gradient-text">connect</span>
           </h2>
@@ -122,7 +122,7 @@ export function ContactForm() {
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
-                  className="mt-6 text-sm text-cyan-400 hover:underline"
+                  className="mt-6 text-sm text-emerald-400 hover:underline"
                 >
                   Send another message
                 </button>
@@ -148,7 +148,7 @@ export function ContactForm() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Your name"
-                      className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pr-4 pl-10 text-white placeholder-slate-500 outline-none transition-colors focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/30"
+                      className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pr-4 pl-10 text-white placeholder-slate-500 outline-none transition-colors focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30"
                     />
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export function ContactForm() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pr-4 pl-10 text-white placeholder-slate-500 outline-none transition-colors focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/30"
+                      className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pr-4 pl-10 text-white placeholder-slate-500 outline-none transition-colors focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30"
                     />
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export function ContactForm() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell me about your project, opportunity, or question..."
                     rows={4}
-                    className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition-colors focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/30"
+                    className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition-colors focus:border-emerald-400/50 focus:ring-1 focus:ring-emerald-400/30"
                   />
                 </div>
 
@@ -191,7 +191,7 @@ export function ContactForm() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 py-3.5 font-medium text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-purple-500 py-3.5 font-medium text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'submitting' ? (
                     <>
