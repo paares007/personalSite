@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Sparkles } from 'lucide-react'
+import { ArrowDown, FileText, Sparkles } from 'lucide-react'
 import { GitHubIcon, LinkedInIcon } from './icons/SocialIcons'
 import { SITE } from '../config/site'
 
@@ -117,6 +117,13 @@ export function Hero() {
           >
             <LinkedInIcon className="h-5 w-5" />
             LinkedIn
+          </a>
+          <a
+            href="#resume"
+            className="flex items-center gap-2 rounded-xl border border-white/10 px-6 py-3 font-medium text-slate-300 transition-all hover:border-emerald-400/50 hover:text-emerald-400"
+          >
+            <FileText className="h-5 w-5" />
+            Resume
           </a>
           <a
             href="#contact"

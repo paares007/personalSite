@@ -105,6 +105,12 @@ export const SITE = {
       ],
     },
   ],
+  // Lives in `public/`, so the URL is stable and the file ships with the build.
+  resume: {
+    url: '/Pablo-Arango-Resume.pdf',
+    downloadName: 'Pablo-Arango-Resume.pdf',
+    pages: 1,
+  },
   github: 'https://github.com/paares007',
   githubUsername: 'paares007',
   linkedin: 'https://www.linkedin.com/in/pablo-arango-esc/',

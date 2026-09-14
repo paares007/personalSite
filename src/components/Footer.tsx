@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react'
 import { GitHubIcon, LinkedInIcon } from './icons/SocialIcons'
 import { SITE } from '../config/site'
 
@@ -8,7 +9,16 @@ export function Footer() {
         <p className="text-sm text-slate-500">
           © {new Date().getFullYear()} {SITE.name}. Built with React & curiosity.
         </p>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
+          <a
+            href={SITE.resume.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-emerald-400"
+          >
+            <FileText className="h-4 w-4" />
+            Resume
+          </a>
           <a
             href={SITE.github}
             target="_blank"

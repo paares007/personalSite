@@ -1,9 +1,16 @@
+import { lazy, Suspense, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, FolderGit2, GitFork, Loader2, Star } from 'lucide-react'
+import { BookOpen, ExternalLink, FolderGit2, GitFork, Loader2, Star } from 'lucide-react'
 import { LANGUAGE_COLORS } from '../config/projects'
 import { SITE } from '../config/site'
-import { useGitHubRepos } from '../hooks/useGitHubRepos'
+import { useGitHubRepos, type GitHubRepo } from '../hooks/useGitHubRepos'
 import { GitHubIcon } from './icons/SocialIcons'
+
+// The markdown renderer is a big dependency — only pull it in when someone
+// actually opens a README.
+const ReadmeModal = lazy(() =>
+  import('./ReadmeModal').then((m) => ({ default: m.ReadmeModal })),
+)
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -32,7 +39,8 @@ export function Projects() {
           </h2>
           <p className="max-w-2xl text-lg text-slate-400">
             A selection of projects from my GitHub — from full-stack web apps to
-            experiments in ML and AI.
+            experiments in ML and AI. Each card is written from the project&apos;s
+            own README, and you can read the whole thing without leaving the page.
           </p>
         </motion.div>
 
@@ -96,13 +104,25 @@ function ProjectCard({
   index,
   featured,
 }: {
-  repo: ReturnType<typeof useGitHubRepos>['repos'][number]
+  repo: GitHubRepo
   index: number
   featured?: boolean
 }) {
+  const [readmeOpen, setReadmeOpen] = useState(false)
+  const [readmeRequested, setReadmeRequested] = useState(false)
+
+  // The README is the most current description of a project, so it outranks the
+  // GitHub blurb — but a hand-written override still wins.
   const description =
-    repo.override?.description ?? repo.description ?? 'No description provided.'
-  const highlights = repo.override?.highlights ?? []
+    repo.override?.description ??
+    repo.readme?.summary ??
+    repo.description ??
+    'No description provided.'
+  const highlights =
+    repo.override?.highlights ??
+    (repo.readme?.highlights.length ? repo.readme.highlights : [])
+  // An untouched starter-template README isn't worth offering to read.
+  const readmeMarkdown = repo.readme?.isBoilerplate ? undefined : repo.readme?.markdown
   const langColor = repo.language ? LANGUAGE_COLORS[repo.language] ?? '#64748b' : null
 
   return (
@@ -197,17 +217,45 @@ function ProjectCard({
             </span>
           </div>
 
-          <a
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 py-2.5 text-sm font-medium text-slate-300 transition-all hover:bg-white/10 hover:text-white"
-          >
-            <GitHubIcon className="h-4 w-4" />
-            View repository
-          </a>
+          <div className="mt-4 space-y-2">
+            {readmeMarkdown && (
+              <button
+                type="button"
+                onClick={() => {
+                  setReadmeRequested(true)
+                  setReadmeOpen(true)
+                }}
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/20 bg-emerald-500/10 py-2.5 text-sm font-medium text-emerald-300 transition-all hover:border-emerald-400/40 hover:bg-emerald-500/15"
+              >
+                <BookOpen className="h-4 w-4" />
+                Read README
+              </button>
+            )}
+            <a
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 py-2.5 text-sm font-medium text-slate-300 transition-all hover:bg-white/10 hover:text-white"
+            >
+              <GitHubIcon className="h-4 w-4" />
+              View repository
+            </a>
+          </div>
         </div>
       </div>
+
+      {readmeMarkdown && readmeRequested && (
+        <Suspense fallback={null}>
+          <ReadmeModal
+            open={readmeOpen}
+            onClose={() => setReadmeOpen(false)}
+            repoName={repo.name}
+            repoUrl={repo.html_url}
+            branch={repo.default_branch ?? 'main'}
+            markdown={readmeMarkdown}
+          />
+        </Suspense>
+      )}
     </motion.article>
   )
 }
